@@ -208,7 +208,7 @@
                 <div class="contact-item"> <i class="fab fa-whatsapp"></i> <div> <strong>WhatsApp:</strong><br> <a href="https://wa.me/250785485314" style="color: var(--primary);">+250 785 485 314</a> </div> </div>
                 <div class="contact-item"> <i class="fas fa-phone"></i> <div> <strong>Phone:</strong><br> +250 785 485 314 </div> </div>
                 <div class="contact-item"> <i class="fas fa-envelope"></i> <div> <strong>Email:</strong><br> <a href="mailto:ubudasashop@gmail.com">ubudasashop@gmail.com</a> </div> </div>
-                <div class="contact-item"> <i class="fas fa-map-marker-alt"></i> <div> <strong>Location:</strong><br> Kigali, Rwanda </div> </div>
+                <div class="contact-item"> <i class="fas fa-map-marker-alt"></i> <div> <strong>Location:</strong><br> Huye, Rwanda </div> </div>
             </div>
         </section>
     </main>
@@ -225,6 +225,9 @@
                     <div class="modal-category" id="modalCategory"></div>
                     <div class="modal-price" id="modalPrice"></div>
                     <div class="modal-description" id="modalDescription"></div>
+                    <button onclick="shareCurrentProduct()" style="width: 100%; background: #25D366; color: white; border: none; padding: 1rem; border-radius: 8px; font-weight: 700; font-size: 1rem; margin-bottom: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;">
+    <i class="fab fa-whatsapp"></i> Share this Product
+</button>
                     <button class="modal-add-cart" id="modalAddCart"> <i class="fas fa-cart-plus"></i> Add to Cart </button>
                 </div>
             </div>
@@ -479,16 +482,26 @@
             document.getElementById('modalDescription').textContent = product.description;
             
             const addCartBtn = document.getElementById('modalAddCart');
+            
+            
+            addCartBtn.dataset.productId = productId; 
+
             addCartBtn.onclick = () => {
                 addToCart(productId);
                 closeProductModal();
             };
             
             document.getElementById('productModal').style.display = 'flex';
+
+            
+            const newUrl = window.location.pathname + '?product=' + productId;
+            window.history.pushState({ path: newUrl }, '', newUrl);
         }
 
         function closeProductModal() {
             document.getElementById('productModal').style.display = 'none';
+            
+            window.history.pushState({ path: window.location.pathname }, '', window.location.pathname);
         }
 
         function closeModalIfOutside(event) {
@@ -635,13 +648,12 @@
             window.open(`https://wa.me/250785485314?text=${message}`, '_blank');
         }
 
-        // 1. Copy Function
+
     function copyMomoNumber() {
         navigator.clipboard.writeText("603629");
         alert("Code Copied: 603629\nOpen MoMo to pay.");
     }
 
-    // 2. Auto-Price Updater
     function updateMomoPriceDisplay() {
         const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
         const upfront = Math.round(total * 0.1);
@@ -649,12 +661,34 @@
         if(display) display.textContent = formatPrice(upfront) + " RWF";
     }
 
-    // 3. Connect it to the Modal
     const originalOpenModal = openPaymentModal;
     openPaymentModal = function() {
         originalOpenModal(); 
         updateMomoPriceDisplay(); 
     };
+
+    function shareCurrentProduct() {
+        const title = document.getElementById('modalTitle').textContent;
+        const price = document.getElementById('modalPrice').textContent;
+        
+        const addToCartBtn = document.getElementById('modalAddCart');
+        const productId = addToCartBtn.dataset.productId;
+        
+        if (!productId) {
+            alert("Error: Could not find product link.");
+            return;
+        }
+        
+        const shareLink = window.location.origin + window.location.pathname + "?product=" + productId;
+
+        const message = `🔥 *Check this out on UBUDASA Shop!*` + 
+                        `\n\n👟 *${title}*` +
+                        `\n💰 ${price}` +
+                        `\n\n👇 *Click to View:*` + 
+                        `\n${shareLink}`;
+
+        window.open(`https://wa.me/?text=${encodeURIComponent(message)}`, '_blank');
+    }
     </script>
 </body>
 </html>
