@@ -314,8 +314,19 @@
         
         window.addEventListener('sanity-ready', async () => {
             console.log("Sanity Connected. Fetching products...");
-            await loadProductsFromSanity();
+            await loadProductsFromSanity(); 
             updateCart();
+            setTimeout(() => {
+                const urlParams = new URLSearchParams(window.location.search);
+                const productId = urlParams.get('product');
+                
+                if (productId) {
+                    const product = products.find(p => p.id === productId);
+                    if (product) {
+                        showProductDetail(productId);
+                    }
+                }
+            }, 500);
         });
 
         async function loadProductsFromSanity() {
