@@ -116,13 +116,31 @@
     
         .payment-modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.7); display: none; align-items: center; justify-content: center; z-index: 4000; padding: 1rem; }
         .payment-content { width: 100%; max-width: 500px; max-height: 90vh; overflow: auto; background: var(--white); padding: 2rem; border-radius: var(--radius); box-shadow: var(--shadow-lg); position: relative; }
-        .payment-content h2 { font-family: 'Montserrat', sans-serif; color: var(--primary); margin-bottom: 1.5rem; text-align: center; }
+        .payment-content h2 { 
+            font-family: 'Montserrat', sans-serif; 
+            color: #E30613; 
+            font-size: 1.4rem; 
+            font-weight: 900; 
+            text-transform: uppercase; 
+            margin-bottom: 1.5rem; 
+            text-align: center; 
+            border-bottom: 4px solid #E30613; 
+            padding-bottom: 12px; 
+            white-space: nowrap; 
+        }
         .close-payment { position: absolute; top: 1rem; right: 1rem; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--gray-600); }
         .payment-form input, .payment-form textarea { width: 100%; padding: 0.75rem; margin-bottom: 1rem; border: 1px solid var(--gray-300); border-radius: var(--radius-sm); font-family: 'Open Sans', sans-serif; }
+        .payment-form input:focus, 
+        .payment-form textarea:focus { 
+            border: 2px solid var(--primary) !important; 
+            outline: none; 
+            box-shadow: 0 0 10px rgba(227, 6, 19, 0.2); 
+            background: #fff5f5;
+        }
         .payment-methods { margin-top: 1.5rem; }
         .payment-methods h3 { font-size: 1rem; margin-bottom: 1rem; color: var(--gray-800); }
         .payment-btn { width: 100%; padding: 1rem; border: none; border-radius: var(--radius-sm); cursor: pointer; font-weight: 700; font-size: 1rem; transition: var(--transition); margin-bottom: 0.75rem; }
-        .cod-btn { background: var(--success); color: var(--white); }
+        .cod-btn { background: #25D366; color: white; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4); }
         .cod-btn:hover { background: #218838; }
         .momo-instructions { background: linear-gradient(135deg, #FFCC00 0%, #FFB300 100%); color: var(--black); padding: 1.5rem; border-radius: var(--radius-sm); margin-bottom: 1rem; text-align: center; }
         .momo-instructions i { font-size: 2rem; margin-bottom: 0.5rem; display: block; }
@@ -143,6 +161,34 @@
         
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
         .pulse { animation: pulse 0.5s ease; }
+
+     .toast-notification {
+            position: fixed;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 16px 30px;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(227, 6, 19, 0.4);
+            z-index: 9999;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .toast-notification.show {
+            top: 30px;
+            opacity: 1;
+            visibility: visible;
+        }   
     </style>
 </head>
 <body>
@@ -251,7 +297,7 @@
                 <div class="payment-methods">
     <h3 style="font-size:1rem; margin-bottom:1rem; color:var(--gray-800);">Payment Instructions:</h3>
     
-    <div style="background:#fff8e1; border:2px dashed #e9b20e; border-radius:12px; padding:1.2rem; text-align:center;">
+    <div style="background:#fff; border:2px solid var(--primary); border-radius:12px; padding:1.5rem; text-align:center; box-shadow: 0 4px 12px rgba(227, 6, 19, 0.1);">
         <div style="font-weight:700; color:#b06a02; margin-bottom:8px;">
             <i class="fas fa-info-circle"></i> Step 1: Pay 10% Deposit
         </div>
@@ -669,7 +715,13 @@
 
     function copyMomoNumber() {
         navigator.clipboard.writeText("603629");
-        alert("Code Copied: 603629\nOpen MoMo to pay.");
+        
+        const toast = document.getElementById("toast");
+        toast.classList.add("show");
+        
+        setTimeout(() => {
+            toast.classList.remove("show");
+        }, 3000);
     }
 
     function updateMomoPriceDisplay() {
@@ -709,5 +761,9 @@
         window.open(`https://wa.me/?text=${encodeURIComponent(message)}`, '_blank');
     }
     </script>
+    <div id="toast" class="toast-notification">
+        <i class="fas fa-check-circle" style="font-size: 1.2rem;"></i> 
+        <span>Code Copied Successfully!</span>
+    </div>
 </body>
 </html>
