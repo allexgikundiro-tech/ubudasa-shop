@@ -619,9 +619,15 @@
                             <span class="product-category">${product.category}</span>
                         </div>
                         <div class="product-info">
-                            <h3>${product.name}</h3>
-                            <div class="product-price">${formatPrice(product.price)} RWF</div>
-                            <button onclick="event.stopPropagation(); addToCart('${product.id}')">
+                        <h3>${product.name}</h3> <div class="product-price" style="display: flex; align-items: center; justify-content: space-between;">
+                            <span>${formatPrice(product.price)} RWF</span>
+                            
+                            <span style="font-size: 0.75rem; color: #28a745; background: #e6f9e9; padding: 2px 6px; border-radius: 4px; font-weight: 600;">
+                                <i class="fas fa-truck"></i> Huye
+                            </span>
+                        </div>
+
+                        <button onclick="event.stopPropagation(); addToCart('${product.id}')">
                                 <i class="fas fa-cart-plus"></i> Add to Cart
                             </button>
                         </div>
