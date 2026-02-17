@@ -575,7 +575,7 @@
                 grid.innerHTML = filteredProducts.map(product => `
                     <div class="product" onclick="showProductDetail('${product.id}')">
                         <div class="product-img-container">
-                            <img src="${product.img}" alt="${product.name}">
+                            <img src="${product.img}" alt="${product.name}" loading="lazy">
                             <span class="product-category">${product.category}</span>
                         </div>
                         <div class="product-info">
@@ -815,10 +815,9 @@
         
         const shareLink = window.location.origin + window.location.pathname + "?product=" + productId;
 
-        const message = `🔥 *Check this out on UBUDASA Shop!*` + 
-                        `\n\n👟 *${title}*` +
+        const message = `🛍️ *${title}*` + 
                         `\n💰 ${price}` +
-                        `\n\n👇 *Click to View:*` + 
+                        `\n\nOrder it on UBUDASA Shop: 👇` + 
                         `\n${shareLink}`;
 
         window.open(`https://wa.me/?text=${encodeURIComponent(message)}`, '_blank');
