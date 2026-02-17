@@ -387,7 +387,7 @@
 
     <script>
         let products = [];
-        let cart = [];
+        let cart = JSON.parse(localStorage.getItem('ubudasa_cart')) || [];
         let currentCategory = 'all';
 
         
@@ -583,7 +583,7 @@
                             <span>${formatPrice(product.price)} RWF</span>
                             
                             <span title="Fast delivery in Huye" style="font-size: 0.75rem; color: #155724; background: #d4edda; padding: 4px 8px; border-radius: 4px; font-weight: 700;">
-                               <i class="fas fa-truck"></i> Delivery: Huye
+                               <i class="fas fa-truck"></i> Free Delivery: Huye
                            </span>
                         </div>
 
@@ -661,6 +661,7 @@
         }
 
         function updateCart() {
+            localStorage.setItem('ubudasa_cart', JSON.stringify(cart));
             const cartCount = document.getElementById('cartCount');
             const cartItems = document.getElementById('cartItems');
             
@@ -748,6 +749,7 @@
             
             sendOrderToWhatsApp(name, phone, address, upfront, remaining);
             cart = [];
+            localStorage.removeItem('ubudasa_cart');
             updateCart();
             closePaymentModal();
             alert(`Order confirmed!\n\nPay ${formatPrice(upfront)} RWF to 603629 (MTN MoMo)\nRemaining ${formatPrice(remaining)} RWF on delivery.`);
