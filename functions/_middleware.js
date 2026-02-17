@@ -36,7 +36,8 @@ export async function onRequest({ request, next }) {
                     el.append(`<meta property="og:title" content="${result.name} | UBUDASA Shop">`, { html: true });
                     el.append(`<meta property="og:description" content="${descText}">`, { html: true });
                     if (result.imageUrl) {
-                        el.append(`<meta property="og:image" content="${result.imageUrl}?w=1200&h=630&fit=crop">`, { html: true });
+                        // THIS IS THE UPDATED LINE
+                        el.append(`<meta property="og:image" content="${result.imageUrl}?w=1200&h=630&fit=fill&bg=ffffff">`, { html: true });
                     }
                 }
             })
