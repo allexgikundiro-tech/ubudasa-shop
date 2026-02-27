@@ -72,9 +72,9 @@
         .no-results { text-align: center; padding: 3rem 1rem; color: var(--gray-600); }
         .no-results i { font-size: 3rem; margin-bottom: 1rem; color: var(--gray-300); }
     
-        .loading { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 5rem 1rem; color: var(--gray-600); }
-        .loading i { font-size: 2.5rem; color: var(--primary); margin-bottom: 1rem; animation: spin 0.8s linear infinite; }
-        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .loading { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 8rem 1.5rem; background: var(--white); }
+        .sync-bar { width: 200px; height: 2px; background: #f0f0f0; position: relative; overflow: hidden; margin-bottom: 1.5rem; }
+        .sync-progress { position: absolute; height: 100%; width: 30%; background: var(--primary); animation: syncMove 1.2s infinite cubic-bezier(0.4, 0, 0.2, 1); }
     
         .product-modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.6); display: none; align-items: center; justify-content: center; z-index: 3000; padding: 1rem; }
         .product-modal-content { width: 100%; max-width: 700px; background: var(--white); border-radius: var(--radius); max-height: 85vh; overflow: auto; box-shadow: var(--shadow-lg); position: relative; }
@@ -238,7 +238,13 @@
                 <div class="search-box"> <i class="fas fa-search"></i> <input type="text" id="searchInput" placeholder="Search products..." onkeyup="searchProducts()"> </div>
             </div>
             <div class="category-filter" id="categoryContainer"></div>
-            <div class="loading" id="loading"> <i class="fas fa-circle-notch"></i> <p style="font-weight: 600; font-size: 0.9rem; letter-spacing: 0.5px;">SECURELY SYNCING PRODUCTS...</p> </div>
+            <div class="loading" id="loading">
+                <div class="sync-bar"><div class="sync-progress"></div></div>
+                <p style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.8rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--black); margin-bottom: 4px;">
+                    Updating Shop Selection
+                </p>
+                <p style="font-size: 0.75rem; color: var(--primary); font-weight: 600;">Quality Guaranteed</p>
+            </div>
             <div class="products-grid" id="productsGrid"></div>
             <div id="noResults" class="no-results" style="display: none;"> <i class="fas fa-search"></i> <p>No products found</p> </div>
         </section>
