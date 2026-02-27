@@ -161,7 +161,7 @@
         
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
         .pulse { animation: pulse 0.5s ease; }
-        #backToTop { position: fixed; bottom: 100px; right: 20px; background: var(--primary); color: white; border: none; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; display: none; align-items: center; justify-content: center; z-index: 2000; box-shadow: var(--shadow-lg); transition: var(--transition); } #backToTop:hover { background: var(--primary-dark); transform: scale(1.1); }
+        #backToTop { position: fixed; bottom: 6.5rem; right: 1.5rem; background: var(--primary); color: white; border: none; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; display: none; align-items: center; justify-content: center; z-index: 2000; box-shadow: var(--shadow-lg); transition: var(--transition); border: 2px solid var(--white); } #backToTop:hover { background: var(--primary-dark); transform: scale(1.1); }
 
      .toast-notification {
             position: fixed;
@@ -802,7 +802,7 @@
         const display = document.getElementById('dynamicUpfrontPrice');
         if(display) display.textContent = formatPrice(upfront) + " RWF";
     }
-    window.addEventListener('scroll', () => { const btn = document.getElementById("backToTop"); if (window.scrollY > 400) { btn.style.display = "flex"; } else { btn.style.display = "none"; } }); function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+    window.addEventListener('scroll', () => { const btn = document.getElementById("backToTop"); const nearBottom = (window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 800); btn.style.display = nearBottom ? "flex" : "none"; }); function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
     const originalOpenModal = openPaymentModal;
     openPaymentModal = function() {
         originalOpenModal(); 
