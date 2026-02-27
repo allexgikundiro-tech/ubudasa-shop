@@ -49,7 +49,7 @@
         .search-box i { color: var(--gray-600); margin-right: 0.75rem; }
         .search-box input { border: none; outline: none; flex: 1; font-size: 1rem; font-family: 'Open Sans', sans-serif; }
         
-        .category-filter { display: flex; gap: 0.75rem; margin-bottom: 2rem; overflow-x: auto; padding-bottom: 0.5rem; }
+        .category-filter { display: flex; gap: 0.75rem; margin-bottom: 2rem; overflow-x: auto; padding: 10px 0; position: sticky; top: 112px; background: var(--white); z-index: 998; border-bottom: 1px solid var(--gray-200); }
         .category-filter::-webkit-scrollbar { height: 6px; }
         .category-filter::-webkit-scrollbar-track { background: var(--gray-200); border-radius: 3px; }
         .category-filter::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 3px; }
@@ -161,6 +161,7 @@
         
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
         .pulse { animation: pulse 0.5s ease; }
+        #backToTop { position: fixed; bottom: 100px; right: 20px; background: var(--primary); color: white; border: none; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; display: none; align-items: center; justify-content: center; z-index: 2000; box-shadow: var(--shadow-lg); transition: var(--transition); } #backToTop:hover { background: var(--primary-dark); transform: scale(1.1); }
 
      .toast-notification {
             position: fixed;
@@ -801,7 +802,7 @@
         const display = document.getElementById('dynamicUpfrontPrice');
         if(display) display.textContent = formatPrice(upfront) + " RWF";
     }
-
+    window.addEventListener('scroll', () => { const btn = document.getElementById("backToTop"); if (window.scrollY > 400) { btn.style.display = "flex"; } else { btn.style.display = "none"; } }); function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
     const originalOpenModal = openPaymentModal;
     openPaymentModal = function() {
         originalOpenModal(); 
@@ -831,6 +832,7 @@
         window.open(`https://wa.me/?text=${encodeURIComponent(message)}`, '_blank');
     }
     </script>
+    <button id="backToTop" onclick="scrollToTop()" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
     <div id="toast" class="toast-notification">
         <i class="fas fa-check-circle" style="font-size: 1.2rem;"></i> 
         <span>Code Copied Successfully!</span>
