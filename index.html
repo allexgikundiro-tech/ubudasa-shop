@@ -546,6 +546,23 @@
             return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
 
+        function formatPrice(price) {
+    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+function getCategoryIcon(cat) {
+    const lower = cat.toLowerCase();
+    if (lower.includes('electr')) return 'fas fa-laptop';
+    if (lower.includes('fash') || lower.includes('cloth')) return 'fas fa-tshirt';
+    if (lower.includes('beaut') || lower.includes('cosm')) return 'fas fa-spray-can';
+    if (lower.includes('sport') || lower.includes('gym')) return 'fas fa-dumbbell';
+    if (lower.includes('food') || lower.includes('groc')) return 'fas fa-utensils';
+    if (lower.includes('toy') || lower.includes('kid')) return 'fas fa-child';
+    if (lower.includes('book')) return 'fas fa-book';
+    if (lower.includes('home') || lower.includes('furn')) return 'fas fa-couch';
+    return 'fas fa-tag'; 
+}
+
         function filterByCategory(category, btn) {
             currentCategory = category;
             document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
