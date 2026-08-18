@@ -483,13 +483,7 @@
                 const catContainer = document.getElementById('categoryContainer');
                 catContainer.innerHTML = activeCategories.map(cat => {
             
-                    let icon = 'fas fa-tag'; 
-                    const c = cat.toLowerCase();
-                    if(c === 'all') icon = 'fas fa-th';
-                    else if(c.includes('electr')) icon = 'fas fa-laptop';
-                    else if(c.includes('fash')) icon = 'fas fa-tshirt';
-                    else if(c.includes('beaut')) icon = 'fas fa-spray-can';
-                    else if(c.includes('sport')) icon = 'fas fa-dumbbell';
+                    let icon = cat === 'All' ? 'fas fa-th' : getCategoryIcon(cat);
 
                     const isActive = cat === 'All' ? 'active' : '';
                     const clickArg = cat === 'All' ? 'all' : cat;
