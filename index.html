@@ -438,14 +438,15 @@
                 if(noResults) noResults.style.display = 'none';
                 
                 
-                const query = `*[_type == "product"]{
-                    _id,
-                    name,
-                    price,
-                    image,
-                    details,
-                    category
-                }`;
+     const query = `*[_type == "product"]{
+    _id,
+    name,
+    price,
+    image,
+    details,
+    "category": category->title,
+    "parentCategory": category->parent->title
+}`;           
 
                 const sanityData = await window.sanityClient.fetch(query);
                 
@@ -465,20 +466,27 @@
                     }
 
             
-                    let cat = item.category ? item.category : "General";
+       let cat = item.category ? item.category : "General";
+let parentCat = item.parentCategory ? item.parentCategory : null;
 
-                    return {
-                        id: item._id,
-                        name: item.name,
-                        price: item.price,
-                        category: cat,
-                        description: descText,
-                        img: imageUrl
-                    };
+return {
+    id: item._id,
+    name: item.name,
+    price: item.price,
+    category: cat,
+    parentCategory: parentCat,
+    description: descText,
+    img: imageUrl
+};             
                 });
          
 
-                const activeCategories = ['All', ...new Set(products.map(p => p.category))];
+const parentCategorySet = new Set();
+products.forEach(p => {
+    const effectiveParent = p.parentCategory || p.category;
+    parentCategorySet.add(effectiveParent);
+});
+const activeCategories = ['All', ...Array.from(parentCategorySet).sort()];
                 
                 const catContainer = document.getElementById('categoryContainer');
                 catContainer.innerHTML = activeCategories.map(cat => {
@@ -582,10 +590,11 @@ function getCategoryIcon(cat) {
             
         
             if (currentCategory !== 'all') {
-        
-                 filteredProducts = filteredProducts.filter(p => p.category.toLowerCase() === currentCategory.toLowerCase());
-            }
-
+    filteredProducts = filteredProducts.filter(p => {
+        const effectiveParent = p.parentCategory || p.category;
+        return effectiveParent.toLowerCase() === currentCategory.toLowerCase();
+    });
+}
             if (searchTerm) {
                 filteredProducts = filteredProducts.filter(p => 
                     p.name.toLowerCase().includes(searchTerm) || 
