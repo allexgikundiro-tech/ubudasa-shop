@@ -723,7 +723,7 @@ function getCategoryIcon(cat) {
                         <div class="payment-total">Total: ${formatPrice(total)} RWF</div>
                         <div class="payment-details">
                             <strong>Payment Method:</strong><br>
-                            Pay ${formatPrice(upfront)} RWF (10%) to MTN MoMo: 603629<br>
+                            Pay ${formatPrice(upfront)} RWF (10%) to MTN MoMo: 603628<br>
                             Pay ${formatPrice(remaining)} RWF (90%) on delivery
                         </div>
                     </div>
@@ -778,7 +778,7 @@ function getCategoryIcon(cat) {
             localStorage.removeItem('ubudasa_cart');
             updateCart();
             closePaymentModal();
-            alert(`Order confirmed!\n\nPay ${formatPrice(upfront)} RWF to 603629 (MTN MoMo)\nRemaining ${formatPrice(remaining)} RWF on delivery.`);
+            alert(`Order confirmed!\n\nPay ${formatPrice(upfront)} RWF to 603628 (MTN MoMo)\nRemaining ${formatPrice(remaining)} RWF on delivery.`);
         }
 
         function sendOrderToWhatsApp(name, phone, address, upfront, remaining) {
@@ -795,7 +795,7 @@ function getCategoryIcon(cat) {
             `*Order Details:*%0A${orderDetails}%0A%0A` +
             `*Total Amount:* ${formatPrice(total)} RWF%0A%0A` +
             `*Payment Breakdown:*%0A` +
-            `✅ 10% Upfront (MTN MoMo 603629): ${formatPrice(upfront)} RWF%0A` +
+            `✅ 10% Upfront (MTN MoMo 603628): ${formatPrice(upfront)} RWF%0A` +
             `📦 90% On Delivery: ${formatPrice(remaining)} RWF`;
             
             window.open(`https://wa.me/250780387780?text=${message}`, '_blank');
@@ -803,7 +803,7 @@ function getCategoryIcon(cat) {
 
 
     function copyMomoNumber() {
-        navigator.clipboard.writeText("603629");
+        navigator.clipboard.writeText("603628");
         
         const toast = document.getElementById("toast");
         toast.classList.add("show");
