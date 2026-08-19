@@ -26,7 +26,7 @@
         nav button:hover { color: var(--primary); }
         nav button.active { color: var(--primary); }
         nav button.active::after { content: ''; position: absolute; bottom: 0; left: 20%; right: 20%; height: 3px; background: var(--primary); border-radius: 3px 3px 0 0; }
-        /
+        
         main { padding: 1.5rem; min-height: calc(100vh - 200px); }
     
         #home { text-align: center; padding: 2.5rem 1rem; max-width: 800px; margin: 0 auto; }
@@ -185,12 +185,12 @@
             transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
         }
 
-        .toast-notification.show {
+           .toast-notification.show {
             top: 30px;
             opacity: 1;
             visibility: visible;
         }   
-    </style>
+    </style>     
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-NL19G8RSS9"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -256,14 +256,14 @@
                 <li>Competitive prices</li>
                 <li>Reliable delivery service</li>
                 <li>Excellent customer support</li>
-                <li>Secure payment: pay 10% upfront to MTN MoMo (603628), rest on delivery</li>
+                <li>Secure payment: pay 10% upfront to MTN MoMo (603629), rest on delivery</li>
             </ul>
         </section>
         <section id="contact">
             <h2>Contact Us</h2>
             <div class="contact-info">
                 <div class="contact-item"> <i class="fab fa-whatsapp"></i> <div> <strong>WhatsApp:</strong><br> <a href="https://wa.me/250780387780" style="color: var(--primary);">+250 785 485 314</a> </div> </div>
-                <div class="contact-item"> <i class="fas fa-phone"></i> <div> <strong>Phone:</strong><br> +250 780 387 780 </div> </div>
+                <div class="contact-item"> <i class="fas fa-phone"></i> <div> <strong>Phone:</strong><br> +250 785 485 314 </div> </div>
                 <div class="contact-item"> <i class="fas fa-envelope"></i> <div> <strong>Email:</strong><br> <a href="mailto:ubudasashop@gmail.com">ubudasashop@gmail.com</a> </div> </div>
                 <div class="contact-item"> <i class="fas fa-map-marker-alt"></i> <div> <strong>Location:</strong><br> Huye, Rwanda </div> </div>
             </div>
@@ -316,7 +316,7 @@
         <div style="background:white; border:1px solid #e9b20e; padding:10px; border-radius:8px; display:flex; justify-content:space-between; align-items:center;">
             <div style="text-align:left;">
                 <span style="display:block; font-size:0.7rem; font-weight:700; color:#666;">MTN MOMO CODE</span>
-                <span style="font-size:1.4rem; font-weight:800; color:var(--primary);">603628</span>
+                <span style="font-size:1.4rem; font-weight:800; color:var(--primary);">603629</span>
             </div>
             <button onclick="copyMomoNumber()" style="background:var(--primary); color:white; border:none; padding:8px 15px; border-radius:6px; font-weight:700; cursor:pointer;">
                 Copy
@@ -438,7 +438,7 @@
                 if(noResults) noResults.style.display = 'none';
                 
                 
-     const query = `*[_type == "product"]{
+            const query = `*[_type == "product"]{
     _id,
     name,
     price,
@@ -446,7 +446,7 @@
     details,
     "category": category->title,
     "parentCategory": category->parent->title
-}`;           
+}`;
 
                 const sanityData = await window.sanityClient.fetch(query);
                 
@@ -466,7 +466,7 @@
                     }
 
             
-       let cat = item.category ? item.category : "General";
+                    let cat = item.category ? item.category : "General";
 let parentCat = item.parentCategory ? item.parentCategory : null;
 
 return {
@@ -477,16 +477,16 @@ return {
     parentCategory: parentCat,
     description: descText,
     img: imageUrl
-};             
+};
                 });
          
 
-const parentCategorySet = new Set();
+              const parentCategorySet = new Set();
 products.forEach(p => {
     const effectiveParent = p.parentCategory || p.category;
     parentCategorySet.add(effectiveParent);
 });
-const activeCategories = ['All', ...Array.from(parentCategorySet).sort()];
+const activeCategories = ['All', ...Array.from(parentCategorySet).sort()];  
                 
                 const catContainer = document.getElementById('categoryContainer');
                 catContainer.innerHTML = activeCategories.map(cat => {
@@ -544,9 +544,6 @@ const activeCategories = ['All', ...Array.from(parentCategorySet).sort()];
             }
         }
 
-        function formatPrice(price) {
-            return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        }
 
         function formatPrice(price) {
     return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -732,7 +729,7 @@ function getCategoryIcon(cat) {
                         <div class="payment-total">Total: ${formatPrice(total)} RWF</div>
                         <div class="payment-details">
                             <strong>Payment Method:</strong><br>
-                            Pay ${formatPrice(upfront)} RWF (10%) to MTN MoMo: 603628<br>
+                            Pay ${formatPrice(upfront)} RWF (10%) to MTN MoMo: 603629<br>
                             Pay ${formatPrice(remaining)} RWF (90%) on delivery
                         </div>
                     </div>
@@ -787,7 +784,7 @@ function getCategoryIcon(cat) {
             localStorage.removeItem('ubudasa_cart');
             updateCart();
             closePaymentModal();
-            alert(`Order confirmed!\n\nPay ${formatPrice(upfront)} RWF to 603628 (MTN MoMo)\nRemaining ${formatPrice(remaining)} RWF on delivery.`);
+            alert(`Order confirmed!\n\nPay ${formatPrice(upfront)} RWF to 603629 (MTN MoMo)\nRemaining ${formatPrice(remaining)} RWF on delivery.`);
         }
 
         function sendOrderToWhatsApp(name, phone, address, upfront, remaining) {
@@ -804,7 +801,7 @@ function getCategoryIcon(cat) {
             `*Order Details:*%0A${orderDetails}%0A%0A` +
             `*Total Amount:* ${formatPrice(total)} RWF%0A%0A` +
             `*Payment Breakdown:*%0A` +
-            `✅ 10% Upfront (MTN MoMo 603628): ${formatPrice(upfront)} RWF%0A` +
+            `✅ 10% Upfront (MTN MoMo 603629): ${formatPrice(upfront)} RWF%0A` +
             `📦 90% On Delivery: ${formatPrice(remaining)} RWF`;
             
             window.open(`https://wa.me/250780387780?text=${message}`, '_blank');
@@ -812,7 +809,7 @@ function getCategoryIcon(cat) {
 
 
     function copyMomoNumber() {
-        navigator.clipboard.writeText("603628");
+        navigator.clipboard.writeText("603629");
         
         const toast = document.getElementById("toast");
         toast.classList.add("show");
