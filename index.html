@@ -477,7 +477,14 @@ return {
                 });
          
 
-              const activeCategories = ['All', 'Life', 'Electronics', 'Fashion', 'Beauty', 'Sports', 'Food', 'Groceries', 'Accessories', 'Home', 'Kitchen', 'Other'];
+              const rawCats = [...new Set(products.map(p => p.category))];
+const ordered = ['All'];
+if (rawCats.includes('Life')) ordered.push('Life');
+const middleOrder = ['Electronics', 'Fashion', 'Beauty', 'Sports', 'Food', 'Groceries', 'Accessories', 'Home', 'Kitchen'];
+middleOrder.forEach(c => { if (rawCats.includes(c)) ordered.push(c); });
+rawCats.forEach(c => { if (!ordered.includes(c) && c !== 'Other') ordered.push(c); });
+if (rawCats.includes('Other')) ordered.push('Other');
+const activeCategories = ordered;
 if (rawCats.includes('Life')) activeCategories.push('Life');
 middleOrder.forEach(c => { if (rawCats.includes(c)) activeCategories.push(c); });
 rawCats.forEach(c => { if (!activeCategories.includes(c) && c !== 'Other') activeCategories.push(c); });
