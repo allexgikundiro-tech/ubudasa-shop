@@ -477,7 +477,13 @@ return {
                 });
          
 
-              const activeCategories = ['All', ...new Set(products.map(p => p.category))];  
+              const rawCats = [...new Set(products.map(p => p.category))];
+const middleOrder = ['Electronics', 'Fashion', 'Beauty', 'Sports', 'Food', 'Groceries', 'Accessories', 'Home', 'Kitchen'];
+const activeCategories = ['All'];
+if (rawCats.includes('Life')) activeCategories.push('Life');
+middleOrder.forEach(c => { if (rawCats.includes(c)) activeCategories.push(c); });
+rawCats.forEach(c => { if (!activeCategories.includes(c) && c !== 'Other') activeCategories.push(c); });
+if (rawCats.includes('Other')) activeCategories.push('Other');  
                 
                 const catContainer = document.getElementById('categoryContainer');
                 catContainer.innerHTML = activeCategories.map(cat => {
