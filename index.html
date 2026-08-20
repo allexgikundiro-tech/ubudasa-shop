@@ -484,7 +484,7 @@ const middleOrder = ['Electronics', 'Fashion', 'Beauty', 'Sports', 'Food', 'Groc
 middleOrder.forEach(c => { if (rawCats.includes(c)) ordered.push(c); });
 rawCats.forEach(c => { if (!ordered.includes(c) && c !== 'Other') ordered.push(c); });
 if (rawCats.includes('Other')) ordered.push('Other');
-const activeCategories = ordered;
+const activeCategories = [...new Set(ordered)];
 if (rawCats.includes('Life')) activeCategories.push('Life');
 middleOrder.forEach(c => { if (rawCats.includes(c)) activeCategories.push(c); });
 rawCats.forEach(c => { if (!activeCategories.includes(c) && c !== 'Other') activeCategories.push(c); });
