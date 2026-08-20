@@ -221,7 +221,7 @@
     </nav>
     <main>
         <section id="home">
-            <div class="hero-icon">ðŸŽ</div>
+            <div class="hero-icon">🎁</div>
             <h2>Welcome to UBUDASA Shop</h2>
             <p>Your one-stop online shop for quality products delivered right to your doorstep across Huye.</p>
             <div class="features">
@@ -789,8 +789,8 @@ function getCategoryIcon(cat) {
             `*Order Details:*%0A${orderDetails}%0A%0A` +
             `*Total Amount:* ${formatPrice(total)} RWF%0A%0A` +
             `*Payment Breakdown:*%0A` +
-            `âœ… 10% Upfront (MTN MoMo 603628): ${formatPrice(upfront)} RWF%0A` +
-            `ðŸ“¦ 90% On Delivery: ${formatPrice(remaining)} RWF`;
+            `✅ 10% Upfront (MTN MoMo 603628): ${formatPrice(upfront)} RWF%0A` +
+            `📦 90% On Delivery: ${formatPrice(remaining)} RWF`;
             
             window.open(`https://wa.me/250780387780?text=${message}`, '_blank');
         }
@@ -843,8 +843,8 @@ function getCategoryIcon(cat) {
         const shareLink = window.location.origin + window.location.pathname + "?product=" + productId;
 
         const message = `ðŸ›ï¸ *${title}*` + 
-                        `\nðŸ’° ${price}` +
-                        `\n\nOrder it on UBUDASA Shop: ðŸ‘‡` + 
+                        `\n💰 ${price}` +
+                        `\n\nOrder it on UBUDASA Shop: 👇` + 
                         `\n${shareLink}`;
 
         window.open(`https://wa.me/?text=${encodeURIComponent(message)}`, '_blank');
