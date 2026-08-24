@@ -776,17 +776,10 @@ function getCategoryIcon(cat) {
             };
             
             document.getElementById('productModal').style.display = 'flex';
-        if (!sessionStorage.getItem('ubudasa_howto_shown')) {
-            openHowToOrder();
-            sessionStorage.setItem('ubudasa_howto_shown', '1');
-            setTimeout(() => {
-                closeHowToOrder();
-            }, 6000);
-        }
-
-            
-            const newUrl = window.location.pathname + '?product=' + productId;
-            window.history.pushState({ path: newUrl }, '', newUrl);
+        openHowToOrder();
+        setTimeout(() => {
+            closeHowToOrder();
+        }, 6000);window.history.pushState({ path: newUrl }, '', newUrl);
         }
 
         function closeProductModal() {
