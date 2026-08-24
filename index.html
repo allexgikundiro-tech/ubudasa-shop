@@ -190,7 +190,57 @@
             opacity: 1;
             visibility: visible;
         }   
-    </style>     
+    
+        .mission-ribbon {
+            background: linear-gradient(135deg, #fff5f5, #ffffff);
+            border: 2px solid #E30613;
+            border-radius: 12px;
+            padding: 1.2rem 1rem;
+            margin: 1.8rem auto;
+            max-width: 700px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(227,6,19,0.1);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: #E30613;
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
+            animation: missionSlideIn 1.2s ease-out;
+        }
+        .mission-ribbon::before,
+        .mission-ribbon::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 40px;
+            height: 2px;
+            background: #E30613;
+            opacity: 0.5;
+        }
+        .mission-ribbon::before { left: 12px; }
+        .mission-ribbon::after { right: 12px; }
+        .mission-ribbon span {
+            display: inline-block;
+            font-size: 1.3rem;
+            line-height: 1.4;
+            animation: missionFloat 3s ease-in-out 1.2s infinite;
+        }
+        @keyframes missionSlideIn {
+            0% { transform: translateX(-40px); opacity: 0; }
+            100% { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes missionFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        @media (max-width: 600px) {
+            .mission-ribbon { padding: 1rem 0.8rem; }
+            .mission-ribbon span { font-size: 1rem; }
+            .mission-ribbon::before, .mission-ribbon::after { width: 20px; }
+        }
+</style>     
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-NL19G8RSS9"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -224,6 +274,9 @@
             <div class="hero-icon">🎁</div>
             <h2>Welcome to UBUDASA Shop</h2>
             <p>Your one-stop online shop for quality products delivered right to your doorstep across Huye.</p>
+            <div class="mission-ribbon">
+                <span>UBUZIMA BWIZA BUTANGIRA N’IBYO DUKENEYE</span>
+            </div>
             <div class="features">
                 <div class="feature"> <i class="fas fa-truck"></i> <h3>Fast Delivery</h3> <p>Quick delivery across all major cities in Huye</p> </div>
                 <div class="feature"> <i class="fas fa-money-bill-wave"></i> <h3>Flexible Payment</h3> <p>Pay 10% upfront, rest on delivery</p> </div>
