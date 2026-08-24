@@ -240,6 +240,84 @@
             .mission-ribbon span { font-size: 1rem; }
             .mission-ribbon::before, .mission-ribbon::after { width: 20px; }
         }
+
+        .howto-modal {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.7);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 5000;
+            padding: 1rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .howto-modal.show {
+            display: flex;
+            opacity: 1;
+        }
+        .howto-content {
+            background: white;
+            max-width: 500px;
+            width: 100%;
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+            position: relative;
+            text-align: center;
+            animation: slideUp 0.4s ease;
+        }
+        .howto-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #E30613;
+            color: white;
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+        .howto-step {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            text-align: left;
+            margin: 1rem 0;
+        }
+        .howto-num {
+            background: #E30613;
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        .howto-step p {
+            margin: 0;
+            font-size: 0.95rem;
+            color: #343A40;
+        }
+        .howto-important {
+            background: #fff5f5;
+            border-left: 4px solid #E30613;
+            padding: 0.75rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: #1C1C1C;
+        }
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
 </style>     
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-NL19G8RSS9"></script>
     <script>
@@ -278,29 +356,6 @@
                 <span>UBUZIMA BWIZA BUTANGIRANA N’IBYO DUKENEYE</span>
             </div>
             
-            <div style="max-width: 800px; margin: 2.5rem auto; text-align: center;">
-                <h3 style="font-family: 'Montserrat', sans-serif; font-size: 1.5rem; font-weight: 800; color: #1C1C1C; margin-bottom: 1.5rem;">
-                    HOW TO ORDER IN <span style="color: #E30613;">3 SIMPLE STEPS</span>
-                </h3>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.2rem;">
-                    <div style="background: white; border: 2px solid #E9ECEF; border-radius: 16px; padding: 1.5rem 1rem; box-shadow: 0 4px 10px rgba(0,0,0,0.06);">
-                        <div style="width: 50px; height: 50px; background: #E30613; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-size: 1.5rem; font-weight: 700;">1</div>
-                        <div style="font-weight: 700; margin-bottom: 0.5rem; color: #1C1C1C;">Choose Product</div>
-                        <div style="font-size: 0.9rem; color: #6C757D;">Browse and add items to your cart</div>
-                    </div>
-                    <div style="background: white; border: 2px solid #E9ECEF; border-radius: 16px; padding: 1.5rem 1rem; box-shadow: 0 4px 10px rgba(0,0,0,0.06);">
-                        <div style="width: 50px; height: 50px; background: #E30613; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-size: 1.5rem; font-weight: 700;">2</div>
-                        <div style="font-weight: 700; margin-bottom: 0.5rem; color: #1C1C1C;">Pay 10% Deposit</div>
-                        <div style="font-size: 0.9rem; color: #6C757D;">Secure via MTN MoMo <strong>603628</strong></div>
-                    </div>
-                    <div style="background: white; border: 2px solid #E9ECEF; border-radius: 16px; padding: 1.5rem 1rem; box-shadow: 0 4px 10px rgba(0,0,0,0.06);">
-                        <div style="width: 50px; height: 50px; background: #E30613; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-size: 1.5rem; font-weight: 700;">3</div>
-                        <div style="font-weight: 700; margin-bottom: 0.5rem; color: #1C1C1C;">Fast Delivery</div>
-                        <div style="font-size: 0.9rem; color: #6C757D;">Delivered to your door in Huye</div>
-                    </div>
-                </div>
-            </div>
-
             <div class="features">
                 <div class="feature"> <i class="fas fa-truck"></i> <h3>Fast Delivery</h3> <p>Quick delivery across all major cities in Huye</p> </div>
                 <div class="feature"> <i class="fas fa-money-bill-wave"></i> <h3>Flexible Payment</h3> <p>Pay 10% upfront, rest on delivery</p> </div>
@@ -453,6 +508,21 @@
         </div>
     </footer>
     
+
+    
+    <div class="howto-modal" id="howToOrderModal">
+        <div class="howto-content">
+            <button class="howto-close" onclick="closeHowToOrder()">&times;</button>
+            <h3 style="font-family:'Montserrat',sans-serif; font-size:1.5rem; color:#E30613; font-weight:800; margin-bottom:0.5rem;">HOW TO ORDER</h3>
+            <p style="font-size:0.9rem; color:#6C757D; margin-bottom:1rem;">3 simple steps to get your product delivered</p>
+            <div class="howto-step"><div class="howto-num">1</div><p><strong>Choose product</strong><br>Browse and add to cart</p></div>
+            <div class="howto-step"><div class="howto-num">2</div><p><strong>Pay 10% deposit</strong><br>MTN MoMo: <strong>603628</strong></p></div>
+            <div class="howto-step"><div class="howto-num">3</div><p><strong>Fast delivery</strong><br>Delivered to your door in Huye</p></div>
+            <div class="howto-important">
+                <strong>Important:</strong> Add to Cart button is available on each product. You can pay 10% upfront, rest on delivery. Quality guaranteed.
+            </div>
+        </div>
+    </div>
 
     <script type="module">
         import {createClient} from 'https://esm.sh/@sanity/client'
@@ -727,6 +797,13 @@ function getCategoryIcon(cat) {
             };
             
             document.getElementById('productModal').style.display = 'flex';
+        if (!sessionStorage.getItem('ubudasa_howto_shown')) {
+            openHowToOrder();
+            sessionStorage.setItem('ubudasa_howto_shown', '1');
+            setTimeout(() => {
+                closeHowToOrder();
+            }, 6000);
+        }
 
             
             const newUrl = window.location.pathname + '?product=' + productId;
